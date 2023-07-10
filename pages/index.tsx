@@ -90,7 +90,7 @@ const Home: NextPage = () => {
     console.log(values)
     values.current_sector = currentSector;
     values.selected_sectors = selectedSectors.toString();
-    /* await axios.post('/api/submit', values)
+    await axios.post('/api/submit', values)
       .then(function (response) {
         console.log(response);
         toast.success('Obrigado!');
@@ -112,7 +112,7 @@ const Home: NextPage = () => {
       })
       .finally(() => {
         setTimeout(() => { location.reload(); }, 1000);
-      }); */
+      });
   }
   // flex min-h-screen flex-col items-center justify-between p-24
   return (
@@ -206,7 +206,7 @@ const Home: NextPage = () => {
                         value={field.value}
                         mask={phoneMask}
                         placeholder="Digite seu número de telefone/celular"
-                        onAccept={ (v) => values.phone = v }
+                        onAccept={(v) => values.phone = v}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       />
                     }

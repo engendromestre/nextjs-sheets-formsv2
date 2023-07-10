@@ -32,16 +32,16 @@ const phoneMask = [{ mask: '(00) 0000-0000' }, { mask: '(00) 00000-0000' }];
 const Home: NextPage = () => {
   const [currentSector, setCurrentSector] = useState("CAPS II");
   const [selectedSectors, setSelectedSectors] = useState<ISelected[]>([]);
-  const [availableSectors, setAvailableSectors] = useState(2);
+  const [availableSectors, setAvailableSectors] = useState(3);
 
   const handleInitialState = () => {
     setCurrentSector("CAPS II");
     setSelectedSectors([]);
-    setAvailableSectors(2);
+    setAvailableSectors(3);
   }
 
   const currentOptions = ["CAPS II", "CAPS AD", "SRT", "OFICINA", "INTERAGIR"];
-  const afterOptions = ["Selecione...", "CAPS II", "CAPS AD", "SRT"];
+  const afterOptions = ["Selecione...", "CAPS II", "CAPS AD", "SRT"]; // NOT PUT "OFICINA"
   const initialValues: MyFormValues = {
     name: "",
     email: "",
@@ -67,9 +67,9 @@ const Home: NextPage = () => {
     shallow.shift();
     const sector = (event.target as any).value;
     const index = shallow.indexOf(sector);
-    if (index > -1) {
+    /* if (index > -1) {
       shallow.splice(shallow.indexOf(sector), 1);
-    }
+    } */
     setAvailableSectors(shallow.length);
     setCurrentSector((event.target as any).value);
   };
@@ -119,7 +119,7 @@ const Home: NextPage = () => {
           <h1 className="mb-5 sm:text-6xl text-5xl items-center Avenir xl:w-2/2 text-gray-900 dark:text-white">
             Escolha seu time!
           </h1>
-          <p className="xl:w-3/4 text-gray-600 text-lg">
+          <p className="xl:w-3/4 text-gray-600 text-lg dark:text-gray-300">
             Frente a proximidade de convênio da <strong>Unidade de Internação "Interagir"</strong>, gostariamos de
             atualizar manifestação de interesse dos servidores em compor nova equipe. Solicitamos o preenchimento completo
             do formulário para que possamos mapear o desejo de a possibilidade de conciliar com o dimensionamento
@@ -128,7 +128,7 @@ const Home: NextPage = () => {
             Na impossibilidade de contemplar o desejo do servidor, discutiremos junto ao NSDRH nova lotação.
           </p>
           <br />
-          <p className='xl:w-3/4 text-gray-600 text-lg text-center'>
+          <p className='xl:w-3/4 text-gray-600 text-lg text-center dark:text-gray-500'>
             Atenciosamente
             <br />
             <span className='mb-5 sm:text-3xl text-2xl items-center Avenir xl:w-2/2 text-gray-900 dark:text-white'>GAIS</span>
@@ -143,7 +143,7 @@ const Home: NextPage = () => {
           >
             {({ errors, touched, isSubmitting }) => (
               <Form className="w-80">
-                <div className="mb-12">
+                <div className="mb-6">
                   <label
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -242,19 +242,24 @@ const Home: NextPage = () => {
                     >
                       Equipes Disponíveis
                     </label>
+                    {/* <div className='text-white'>{selectedSectors.toString()}</div> */}
                     <select
                       onChange={handleAfterSector}
                       name="current_sector"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     >
+
                       {afterOptions.map((option, index) => {
+
+                        let textValue = option !== currentSector ? option : "MEU SETOR ATUAL"
+
                         if (
-                          currentSector !== option &&
+                          option !== "INTERAGIR" &&
                           selectedSectors.indexOf(option as any) == -1
                         ) {
                           return (
                             <option value={option} key={index}>
-                              {option}
+                              {textValue}
                             </option>
                           );
                         }

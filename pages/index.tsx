@@ -109,8 +109,10 @@ const Home: NextPage = () => {
             "Ocorreu um erro interno. Tente novamente mais tarde"
           );
         }
+      })
+      .finally(() => {
+        setTimeout(() => { location.reload(); }, 1000);
       });
-    location.reload();
   }
   // flex min-h-screen flex-col items-center justify-between p-24
   return (

@@ -55,7 +55,7 @@ const Home: NextPage = () => {
     email: Yup.string()
       .required("Campo e-mail é obrigatório")
       .email("Campo email deve ser do tipo email"),
-    phone: Yup.string().required("Campo telefone é obrigatório").min(7),
+    phone: Yup.string().required("Campo telefone é obrigatório"),
     current_sector: Yup.string(),
     selected_sectors: Yup.string().min(availableSectors),
   });
